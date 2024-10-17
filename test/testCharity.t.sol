@@ -74,7 +74,6 @@ contract testCharity is Test {
         charitydonation.sendtocharity(charityAddress); // Only the owner can call this
         uint256 charityBalanceAfter = charityAddress.balance;
 
-        
         vm.stopPrank();
     }
 
