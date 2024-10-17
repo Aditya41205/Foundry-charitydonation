@@ -13,7 +13,6 @@ contract testCharity is Test {
     address public charityAddress = makeAddr("CharityAddress");
     CharityDonation public charitydonation;
 
-   
     event DONATOR(uint256 amount, address sender);
 
     // Setup function
@@ -51,9 +50,9 @@ contract testCharity is Test {
         emit DONATOR(MINIMUM_DONATION, Donor); // Emitting expected event for the test
         charitydonation.fund{value: MINIMUM_DONATION}("Alice", "Great cause!");
 
-(uint256 amount, string memory name, string memory feedback)= charitydonation.donorinfo(Donor);
+        (uint256 amount, string memory name, string memory feedback) = charitydonation.donorinfo(Donor);
 
-    assertEq(amount, MINIMUM_DONATION, "Donation amount should match");
+        assertEq(amount, MINIMUM_DONATION, "Donation amount should match");
         assertEq(name, "Alice", "Donor name should match");
         assertEq(feedback, "Great cause!", "Donor feedback should match");
 
@@ -75,10 +74,7 @@ contract testCharity is Test {
         charitydonation.sendtocharity(charityAddress); // Only the owner can call this
         uint256 charityBalanceAfter = charityAddress.balance;
 
-        assertEq(
-            charityBalanceAfter - charityBalanceBefore,
-            "Charity should receive the entire contract balance"
-        );
+        assertEq(charityBalanceAfter - charityBalanceBefore, "Charity should receive the entire contract balance");
         vm.stopPrank();
     }
 
